@@ -1,0 +1,45 @@
+<html data-theme="dark">
+    <head>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+        >
+        <link
+            rel="stylesheet"
+            href="./style.css"
+        >
+        <script src="./functions.js"></script>
+        <title>APOD</title>
+    </head>
+    <body>
+        <main class="container">
+            <div class="center">
+                <h1>Astronomy Picture Of The Day</h1>
+                <secion id="title"></secion>
+                <section id="date"></section>
+                <section id="media">
+                    <img id="apodMedia">
+                </section>
+                <section id="explanation"></section>
+            </div>
+        </main>
+        <section style="text-align: center;">
+            <div class="container">
+                <input id="searchDate" type="date">
+            </div>
+            <div class="grid">
+                <div>
+                    <button onclick="doPrevious()">&lt;</button>
+                </div>
+                <div>
+                    <button onclick="search()">Search</button>
+                </div>
+                <div>
+                    <div>
+                        <button onclick="doNext()">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
