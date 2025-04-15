@@ -1,5 +1,6 @@
 const apiKey = 'YOUR_API_KEY';
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+const responseCache = new Map();
 var currentDate = new Date();
 
 addEventListener("load", (event) => {
@@ -16,6 +17,7 @@ function callApodApi(url) {
         })
         .then(data => {
             updateScreenData(data);
+            responseCache.set(data.date, data);
         })
         .catch(error => {
             console.error('Error: ', error);
@@ -25,11 +27,16 @@ function callApodApi(url) {
 function callApodApiWithDate(date) {
     const urlWithDate = apiUrl + `&date=${date}`;
     console.log(urlWithDate);
-    callApodApi(urlWithDate);
+    if(responseCache.get(date)) {
+        console.log("Cache hit for date: ", date)
+        updateScreenData(responseCache.get(date));
+    } else {
+        console.log("Cache miss calling api.")
+        callApodApi(urlWithDate);  
+    }
 }
 
 function updateScreenData(data){
-    console.log(data);
     document.getElementById('title').innerHTML = data.title;
     var date = new Date(data.date);
     date.setDate(date.getDate() + 1);
